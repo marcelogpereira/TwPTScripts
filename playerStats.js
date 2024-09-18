@@ -49,14 +49,24 @@ async function runAll() {
 async function createInterface() {
   const dailyValues = await runAll();
   const rankingTable = `
-    <div class="rankingSmart">
-      <table>
-        ${types.map((type, index) => `
+    <div class="vis" style="margin-top: 20px; width: 100%;">
+      <table class="vis" style="width: 100%; text-align: left; border-spacing: 2px;">
+        <thead>
           <tr>
-            <th class="typeRanking">${translate(type)}</th>
-            <td>${dailyValues[index]}</td>
+            <th style="background-color: #dfcca6; padding: 5px;">${translate('kill_att')}</th>
+            <th style="background-color: #dfcca6; padding: 5px;">${translate('kill_def')}</th>
+            <th style="background-color: #dfcca6; padding: 5px;">${translate('kill_sup')}</th>
+            <th style="background-color: #dfcca6; padding: 5px;">${translate('loot_res')}</th>
+            <th style="background-color: #dfcca6; padding: 5px;">${translate('loot_vil')}</th>
+            <th style="background-color: #dfcca6; padding: 5px;">${translate('scavenge')}</th>
+            <th style="background-color: #dfcca6; padding: 5px;">${translate('conquer')}</th>
           </tr>
-        `).join('')}
+        </thead>
+        <tbody>
+          <tr>
+            ${dailyValues.map(value => `<td style="background-color: #f4e4bc; padding: 5px;">${value}</td>`).join('')}
+          </tr>
+        </tbody>
       </table>
     </div>
   `;
@@ -68,7 +78,6 @@ createInterface();
 
 function translate(string){
     const gameLocation = game_data.locale
-    console.log(string);
     if (translateScript[gameLocation] !== undefined) {
         return translateScript[gameLocation][string];
     } else {
