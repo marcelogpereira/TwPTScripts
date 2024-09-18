@@ -37,13 +37,55 @@ async function runAll() {
   const [attack, deff, support, farming, villages, scavenge, conquer] = await Promise.all(types.map((type, index) => {
     return new Promise(resolve => setTimeout(() => resolve(fetchRanking(type)), index * 200));
   }));
-  return [attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
-          deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
-          support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
-          farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
-          villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
-          scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
-          conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML];
+  console.log(attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)"));
+  return [
+      {
+            "position":attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
+            "points":attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
+            "date":attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+      },
+      {
+            "position":deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
+            "points":deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
+            "date":deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+      },
+      {
+            "position":support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
+            "points":support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
+            "date":support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+      },
+      {
+            "position":farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
+            "points":farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
+            "date":farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+      },
+      {
+            "position":villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
+            "points":villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
+            "date":villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+      },
+      {
+            "position":scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
+            "points":scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
+            "date":scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+      },
+        {
+            "position":conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
+            "points":conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
+            "date":conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+        }
+
+
+
+
+  ]
+  // return [attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
+  //         deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
+  //         support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
+  //         farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
+  //         villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
+  //         scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
+  //         conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML];
 }
 
 async function createInterface() {
@@ -53,19 +95,19 @@ async function createInterface() {
       <table class="vis" style="width: 100%; text-align: left; border-spacing: 2px;">
         <thead>
           <tr>
-            <th style="background-color: #dfcca6; padding: 5px;">${translate('kill_att')}</th>
-            <th style="background-color: #dfcca6; padding: 5px;">${translate('kill_def')}</th>
-            <th style="background-color: #dfcca6; padding: 5px;">${translate('kill_sup')}</th>
-            <th style="background-color: #dfcca6; padding: 5px;">${translate('loot_res')}</th>
-            <th style="background-color: #dfcca6; padding: 5px;">${translate('loot_vil')}</th>
-            <th style="background-color: #dfcca6; padding: 5px;">${translate('scavenge')}</th>
-            <th style="background-color: #dfcca6; padding: 5px;">${translate('conquer')}</th>
+            <th style="background-color: #dfcca6; padding: 5px;">Categoria</th>
+            <th style="background-color: #dfcca6; padding: 5px;">Position</th>
+            <th style="background-color: #dfcca6; padding: 5px;">Points</th>
+            <th style="background-color: #dfcca6; padding: 5px;">Date</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            ${dailyValues.map(value => `<td style="background-color: #f4e4bc; padding: 5px;">${value}</td>`).join('')}
-          </tr>
+          ${types.map((type, index) => `
+            <tr>
+              <th style="background-color: #f4e4bc; padding: 5px;">${translate(type)}</th>
+              ${Object.keys(dailyValues[index]).map(key => `<td style="padding: 5px;">${dailyValues[index][key]}</td>`).join('')}
+            </tr>
+          `).join('')}
         </tbody>
       </table>
     </div>
