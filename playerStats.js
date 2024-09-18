@@ -3,94 +3,90 @@ let namePlayer = nameElement.innerText.trim().includes('Edit') ? game_data.playe
 const result = nameElement.tagName == 'H2' ? nameElement : document.querySelector('.menu');
 
 const translateScript = {
-  pt_BR: {
-    'kill_att': 'Como atacante',
-    'kill_def': 'Como defensor',
-    'kill_sup': 'Como apoiante',
-    'loot_res': 'Recursos saqueados',
-    'loot_vil': 'Aldeias saqueadas',
-    'scavenge': 'Recursos coletados',
-    'conquer': 'Aldeias conquistadas'
-  },
-  en_DK: {
-    'kill_att': 'Attacker',
-    'kill_def': 'Defender',
-    'kill_sup': 'Supporting',
-    'loot_res': 'Farmed resources',
-    'loot_vil': 'Farmed villages',
-    'scavenge': 'Collected resources',
-    'conquer': 'Conquered villages'
-  },
+    pt_PT: {
+        'kill_att': 'Como atacante',
+        'kill_def': 'Como defensor',
+        'kill_sup': 'Como apoiante',
+        'loot_res': 'Recursos saqueados',
+        'loot_vil': 'Aldeias saqueadas',
+        'scavenge': 'Recursos coletados',
+        'conquer': 'Aldeias conquistadas',
+        'position': 'Posição',
+        'points': 'Pontuação',
+        'date': 'Data'
+    },
+    en_GB: {
+        'kill_att': 'Attacker',
+        'kill_def': 'Defender',
+        'kill_sup': 'Supporting',
+        'loot_res': 'Farmed resources',
+        'loot_vil': 'Farmed villages',
+        'scavenge': 'Collected resources',
+        'conquer': 'Conquered villages',
+        'position': 'Position',
+        'points': 'Points',
+        'date': 'Date'
+    },
 };
 
 const linkBase = `/guest.php?screen=ranking&mode=in_a_day&type=`;
 const types = ['kill_att', 'kill_def', 'kill_sup', 'loot_res', 'loot_vil', 'scavenge', 'conquer'];
 
 async function fetchRanking(type) {
-  const url = `${linkBase}${type}&name=${namePlayer}`;
-  const response = await fetch(url);
-  const data = await response.text();
-  return new DOMParser().parseFromString(data, "text/html");
+    const url = `${linkBase}${type}&name=${namePlayer}`;
+    const response = await fetch(url);
+    const data = await response.text();
+    return new DOMParser().parseFromString(data, "text/html");
 }
 
 async function runAll() {
-  const [attack, deff, support, farming, villages, scavenge, conquer] = await Promise.all(types.map((type, index) => {
-    return new Promise(resolve => setTimeout(() => resolve(fetchRanking(type)), index * 200));
-  }));
-  console.log(attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)"));
-  return [
-      {
-            "position":attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
-            "points":attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
-            "date":attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
-      },
-      {
-            "position":deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
-            "points":deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
-            "date":deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
-      },
-      {
-            "position":support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
-            "points":support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
-            "date":support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
-      },
-      {
-            "position":farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
-            "points":farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
-            "date":farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
-      },
-      {
-            "position":villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
-            "points":villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
-            "date":villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
-      },
-      {
-            "position":scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
-            "points":scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
-            "date":scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
-      },
+    const [attack, deff, support, farming, villages, scavenge, conquer] = await Promise.all(types.map((type, index) => {
+        return new Promise(resolve => setTimeout(() => resolve(fetchRanking(type)), index * 200));
+    }));
+    return [
         {
-            "position":conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
-            "points":conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
-            "date":conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+            "position": attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
+            "points": attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
+            "date": attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+        },
+        {
+            "position": deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
+            "points": deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
+            "date": deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+        },
+        {
+            "position": support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
+            "points": support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
+            "date": support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+        },
+        {
+            "position": farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
+            "points": farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
+            "date": farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+        },
+        {
+            "position": villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
+            "points": villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
+            "date": villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+        },
+        {
+            "position": scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
+            "points": scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
+            "date": scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+        },
+        {
+            "position": conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
+            "points": conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
+            "date": conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
         }
 
 
-
-
-  ]
-  // return [attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
-  //         deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
-  //         support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
-  //         farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
-  //         villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
-  //         scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML,
-  //         conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2)").innerHTML];
+    ]
 }
 
 async function createInterface() {
-  const dailyValues = await runAll();
-  const rankingTable = `
+    const dailyValues = await runAll();
+    const rankingTable = `
     <div class="vis" style="margin-top: 20px; width: 100%;">
       <table class="vis" style="width: 100%; text-align: left; border-spacing: 2px;">
         <thead>
@@ -112,17 +108,17 @@ async function createInterface() {
       </table>
     </div>
   `;
-  result.innerHTML += rankingTable;
-  document.querySelector('.menu').style.display = ''
+    result.innerHTML += rankingTable;
+    document.querySelector('.menu').style.display = ''
 }
 
 createInterface();
 
-function translate(string){
+function translate(string) {
     const gameLocation = game_data.locale
     if (translateScript[gameLocation] !== undefined) {
         return translateScript[gameLocation][string];
     } else {
-        return translateScript['pt_BR'][string];
+        return translateScript['en_GB'][string];
     }
 }
