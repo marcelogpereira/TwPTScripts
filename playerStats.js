@@ -45,43 +45,42 @@ async function runAll() {
     }));
     return [
         {
-            "position": attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
-            "points": attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
-            "date": attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+            "position": attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)")?.innerHTML || "-",
+            "points": attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)")?.innerHTML || "-",
+            "date": attack.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)")?.innerHTML || "-"
         },
         {
-            "position": deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
-            "points": deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
-            "date": deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+            "position": deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)")?.innerHTML || "-",
+            "points": deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)")?.innerHTML || "-",
+            "date": deff.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)")?.innerHTML || "-"
         },
         {
-            "position": support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
-            "points": support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
-            "date": support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+            "position": support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)")?.innerHTML || "-",
+            "points": support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)")?.innerHTML || "-",
+            "date": support.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)")?.innerHTML || "-"
         },
         {
-            "position": farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
-            "points": farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
-            "date": farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+            "position": farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)")?.innerHTML || "-",
+            "points": farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)")?.innerHTML || "-",
+            "date": farming.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)")?.innerHTML || "-"
         },
         {
-            "position": villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
-            "points": villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
-            "date": villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+            "position": villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)")?.innerHTML || "-",
+            "points": villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)")?.innerHTML || "-",
+            "date": villages.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)")?.innerHTML || "-"
         },
         {
-            "position": scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
-            "points": scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
-            "date": scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+            "position": scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)")?.innerHTML || "-",
+            "points": scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)")?.innerHTML || "-",
+            "date": scavenge.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)")?.innerHTML || "-"
         },
         {
-            "position": conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)").innerHTML,
-            "points": conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)").innerHTML,
-            "date": conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)").innerHTML
+            "position": conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(1)")?.innerHTML || "-",
+            "points": conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(4)")?.innerHTML || "-",
+            "date": conquer.querySelector("#in_a_day_ranking_table > tbody > tr:nth-child(2) > td:nth-child(5)")?.innerHTML || "-"
         }
-
-
     ]
+
 }
 
 async function createInterface() {
