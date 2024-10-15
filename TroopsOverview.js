@@ -143,7 +143,7 @@
             await new Promise(res => setTimeout(res, Math.max(lastRunTime + 200 - Date.now(), 0)));
             const url = currentObj.#generateUrl('overview_villages', 'units', {
                 'type': 'away_detail',
-                'filter_villages': '1'
+                'page': '-1'
             });
             const data = currentObj.#fetchHtmlPage(url);
             const parser = new DOMParser();
@@ -160,6 +160,7 @@
                 if (row.classList.contains('units_away')) {
                     return;
                 }
+                debugger;
                 const rowData = row.querySelectorAll('td');
                 let index = 0;
                 rowData.forEach((data) => {
