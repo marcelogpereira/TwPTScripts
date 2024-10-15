@@ -101,7 +101,6 @@
         do {
             var scavengingObject = await getScavengeMassScreenJson(this, currentPage, lastRunTime);
             var supportObject = await getSupportScreenJson(this, currentPage, lastRunTime);
-            debugger;
             if (!scavengingObject) return;
             if (scavengingObject.length === 0) break;
             lastRunTime = Date.now();
@@ -124,7 +123,7 @@
         $.each(supportObject, function(key, value) {
             if (key !== 'militia') troopsObj.supportTroops[key] += value;
         });
-        debugger;
+        debuu
         return troopsObj;
 
         async function getScavengeMassScreenJson(currentObj, currentPage = 0, lastRunTime = 0) {
@@ -244,7 +243,7 @@
 			var troops = type === null ? (() => { return troopsObj; }) : (() => {
 				var troops = {};
 				$.each(troopsObj.villagesTroops, function(key, value) {
-					troops[key] = value + troopsObj.scavengingTroops[key];
+					troops[key] = value + troopsObj.scavengingTroops[key] + troopsObj.supportTroops[key];
 				});
 				return troops;
 			});
