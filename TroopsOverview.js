@@ -1,3 +1,16 @@
+/*
+* Script Name: Troop Counter Overview
+* Version: v1.0.1
+* Last Updated: 2024-10-15
+* Author: NunoF-
+* Author URL: https://marcelogpereira.github.io/
+* Reference: https://forum.tribalwars.net/index.php?threads/villages-troops-counter.292771/
+*/
+
+/*--------------------------------------------------------------------------------------
+ * This script can NOT be cloned and modified without permission from the script author.
+ --------------------------------------------------------------------------------------*/
+
  if (typeof villagesTroopsCounter !== 'undefined') {
     villagesTroopsCounter.init();
  } else {
@@ -123,7 +136,6 @@
         $.each(supportObject, function(key, value) {
             if (key !== 'militia') troopsObj.supportTroops[key] += value;
         });
-        debuu
         return troopsObj;
 
         async function getScavengeMassScreenJson(currentObj, currentPage = 0, lastRunTime = 0) {
@@ -174,7 +186,6 @@
                     }
                 });
             });
-            debugger;
             return supportTroops
 
         }
